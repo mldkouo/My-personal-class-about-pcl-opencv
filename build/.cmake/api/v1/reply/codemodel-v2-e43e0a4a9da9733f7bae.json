@@ -1,0 +1,77 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.1"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "class_in_Tuesday",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "test_one::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_one-Debug-fffc7cd9d6bf123acef7.json",
+					"name" : "test_one",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_three::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_three-Debug-09de4c3fa60b18d0058f.json",
+					"name" : "test_three",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_two::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_two-Debug-a2325ebbc084a99b0cfc.json",
+					"name" : "test_two",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/cuckoo/VSC/vsc cpp/build",
+		"source" : "/home/cuckoo/VSC/vsc cpp"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}

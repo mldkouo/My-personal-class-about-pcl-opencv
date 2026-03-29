@@ -1,0 +1,5 @@
+/home/cuckoo/VSC/vsc cpp/build/CMakeFiles/rebuild_cache.dir
+/home/cuckoo/VSC/vsc cpp/build/CMakeFiles/edit_cache.dir
+/home/cuckoo/VSC/vsc cpp/build/CMakeFiles/test_three.dir
+/home/cuckoo/VSC/vsc cpp/build/CMakeFiles/test_two.dir
+/home/cuckoo/VSC/vsc cpp/build/CMakeFiles/test_one.dir
