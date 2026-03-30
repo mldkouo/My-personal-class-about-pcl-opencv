@@ -9,6 +9,7 @@
 
 // std::string File="../source/";
 
+// 从csv文件读取数据
 std::vector<std::vector<float>> read(std::string File)
 {
     std::vector<std::vector<float>> res;
@@ -22,11 +23,11 @@ std::vector<std::vector<float>> read(std::string File)
     std::string line;
 
     while (std::getline(file, line)) {
-        std::stringstream ss(line); 
+        std::stringstream ss(line);
         std::string v;
         std::vector<float> row;
-        while (std::getline(ss, v, ',')) { 
-            row.push_back(std::stof(v)); 
+        while (std::getline(ss, v, ',')) {
+            row.push_back(std::stof(v));
         }
         res.push_back(row);
     }
@@ -42,13 +43,125 @@ std::vector<std::vector<float>> read(std::string File)
     return res;
 }
 
-void Cloud_Build(pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud)
+void Cloud_Build(pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud,
+    std::vector<std::vector<float>>& data) // 将data读入cloud点云数据
 {
+    if (data.empty()) {
+        std::cerr << "错误：点云数据为空，无法生成对应点云" << std::endl
+                  << "方法：Cloud_Build 未执行" << std::endl;
+        return;
+    }
+    for (auto line : data) {
+        float X = line[0], Y = line[1], Z = line[2];
+        pcl::PointXYZ point;
+        point = { X, Y, Z };
+        cloud->points.push_back(point);
+    }
+    cloud->width = cloud->points.size();
+    cloud->height = 1;
+    cloud->is_dense = 0;
+}
+
+// 从点云构建深度图 参数：生成图像的高度与宽度 相机内参 点云对象
+cv::Mat Depth_Map_Build(
+    int h, int w,
+    float fx, float fy, float cx, float cy,
+    pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud)
+{
+    cv::Mat depth_map = cv::Mat::zeros(h, w, CV_32FC1);
+    for (auto& point : cloud->points) {
+        float x = point.x, y = point.y, z = point.z;
+
+        // 如果点在相机背面可以过滤掉
+        if (z <= 0.001f) {
+            continue;
+        }
+        // 投影公式
+        int u = fx * (x / z) + cx;
+        int v = fy * (y / z) + cy;
+        // 检查边界
+        if (u >= 0 && u < w && v >= 0 && v < h) {
+            float depth = depth_map.at<float>(v, u);
+
+            // Z-Buffering: 如果当前点更近 (z 更小)，或者该像素还没有值 (0)
+
+            // 注意：如果初始化为0，需要特殊处理第一个点
+
+            if (depth == 0.0f || z < depth) {
+                depth_map.at<float>(v, u) = z;
+            }
+        }
+    }
+
+    return depth_map;
+}
+
+void Savecsv_From_DepthMap(
+    std::string img_path,std::string save_path   
+){
+    cv::Mat depth_map=cv::imread(img_path,cv::IMREAD_UNCHANGED);
+    if(depth_map.empty()){
+        std::cerr<<"错误：根据地址："<<img_path<<" 无法读取到图片数据"<<std::endl;
+        return ;
+    }
+    cv::Mat depthfloat;
+
+    depth_map.convertTo(depthfloat,CV_32F);
+
+    std::ofstream file(save_path);
+    if(!file.is_open()){
+        std::cerr<<"错误：无法创建csv文件"<<std::endl;
+        return ;
+    }
+
+    file<<std::fixed<<std::setprecision(6);
+    int rows=depth_map.rows;
+    int cols=depth_map.cols;
+    for (int r = 0; r < rows; ++r) {
+        // 获取当前行的指针，提高访问速度
+        const float* row_ptr = depth_map.ptr<float>(r);
+        
+        for (int c = 0; c < cols; ++c) {
+            float val = row_ptr[c]; // 获取像素深度值
+            
+            file << val;
+            
+            // 如果不是该行最后一个元素，添加逗号
+            if (c < cols - 1) {
+                file << ",";
+            }
+        }
+        // 每行结束换行
+        file << "\n";
+    }
+
+    file.close();
+    std::cout << "✅ 成功保存 CSV 文件: " << save_path << std::endl;
 }
 
 int main()
 {
-    std::string File = "../source/";
+    std::string File = "../source/pc_rot.csv";
+
+    auto depth = read(File);
+    if (depth.empty()) {
+        std::cout << "data is empty, process will be killed" << std::endl;
+        return 0;
+    }
+
+    float fx = 795.209, fy = 793.957, cx = 332.031, cy = 231.308;
+
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>());
+    Cloud_Build(cloud, depth);
+
+    int h = 640, w = 800;
+    cv::Mat Depth_Map = Depth_Map_Build(h, w, fx, fy, cx, cy, cloud);
+
+    cv::Mat img;
+    cv::normalize(Depth_Map, img, 0, 255, cv::NORM_MINMAX, CV_8UC1);
+    cv::imwrite("depth_map.png", img);
+    cv::imshow("Depth Map", img);
+    cv::waitKey(0);
 
     return 0;
 }
