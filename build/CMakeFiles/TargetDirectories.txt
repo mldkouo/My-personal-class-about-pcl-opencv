@@ -1,0 +1,3 @@
+/Users/cuckoo/myclass/mac-object/build/CMakeFiles/class3-24.dir
+/Users/cuckoo/myclass/mac-object/build/CMakeFiles/edit_cache.dir
+/Users/cuckoo/myclass/mac-object/build/CMakeFiles/rebuild_cache.dir
