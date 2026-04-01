@@ -129,6 +129,19 @@ class3-24/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/class3-24.dir/build.make CMakeFiles/class3-24.dir/build
 .PHONY : class3-24/fast
 
+#=============================================================================
+# Target rules for targets named class3-31
+
+# Build rule for target.
+class3-31: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 class3-31
+.PHONY : class3-31
+
+# fast build rule for target.
+class3-31/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/class3-31.dir/build.make CMakeFiles/class3-31.dir/build
+.PHONY : class3-31/fast
+
 pj/pj3-24.o: pj/pj3-24.cpp.o
 .PHONY : pj/pj3-24.o
 
@@ -153,6 +166,30 @@ pj/pj3-24.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/class3-24.dir/build.make CMakeFiles/class3-24.dir/pj/pj3-24.cpp.s
 .PHONY : pj/pj3-24.cpp.s
 
+pj/pj3-31.o: pj/pj3-31.cpp.o
+.PHONY : pj/pj3-31.o
+
+# target to build an object file
+pj/pj3-31.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/class3-31.dir/build.make CMakeFiles/class3-31.dir/pj/pj3-31.cpp.o
+.PHONY : pj/pj3-31.cpp.o
+
+pj/pj3-31.i: pj/pj3-31.cpp.i
+.PHONY : pj/pj3-31.i
+
+# target to preprocess a source file
+pj/pj3-31.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/class3-31.dir/build.make CMakeFiles/class3-31.dir/pj/pj3-31.cpp.i
+.PHONY : pj/pj3-31.cpp.i
+
+pj/pj3-31.s: pj/pj3-31.cpp.s
+.PHONY : pj/pj3-31.s
+
+# target to generate assembly for a file
+pj/pj3-31.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/class3-31.dir/build.make CMakeFiles/class3-31.dir/pj/pj3-31.cpp.s
+.PHONY : pj/pj3-31.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +199,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... class3-24"
+	@echo "... class3-31"
 	@echo "... pj/pj3-24.o"
 	@echo "... pj/pj3-24.i"
 	@echo "... pj/pj3-24.s"
+	@echo "... pj/pj3-31.o"
+	@echo "... pj/pj3-31.i"
+	@echo "... pj/pj3-31.s"
 .PHONY : help
 
 
