@@ -16,5 +16,7 @@ add_definitions(${PCL_DEFINITIONS}
             ${OpenCV_DEFINITIONS})
 
 add_executable(class3-24 pj/pj3-24.cpp)
+add_executable(class3-31 pj/pj3-31.cpp)
 
 target_link_libraries(class3-24 ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(class3-31 ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})

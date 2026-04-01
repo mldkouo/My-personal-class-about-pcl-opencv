@@ -97,46 +97,42 @@ cv::Mat Depth_Map_Build(
 }
 
 void Savecsv_From_DepthMap(
-    std::string img_path,std::string save_path   
-){
-    cv::Mat depth_map=cv::imread(img_path,cv::IMREAD_UNCHANGED);
-    if(depth_map.empty()){
-        std::cerr<<"错误：根据地址："<<img_path<<" 无法读取到图片数据"<<std::endl;
-        return ;
+    cv::Mat& depth_map, std::string save_path)
+{
+    if (depth_map.empty()) {
+        std::cerr << "错误：传入的深度图数据为空" << std::endl;
+        return;
     }
-    cv::Mat depthfloat;
-
-    depth_map.convertTo(depthfloat,CV_32F);
 
     std::ofstream file(save_path);
-    if(!file.is_open()){
-        std::cerr<<"错误：无法创建csv文件"<<std::endl;
-        return ;
+    if (!file.is_open()) {
+        std::cerr << "错误：无法创建 csv 文件: " << save_path << std::endl;
+        return;
     }
 
-    file<<std::fixed<<std::setprecision(6);
-    int rows=depth_map.rows;
-    int cols=depth_map.cols;
+    file << std::fixed << std::setprecision(6);
+    int rows = depth_map.rows;
+    int cols = depth_map.cols;
+
     for (int r = 0; r < rows; ++r) {
-        // 获取当前行的指针，提高访问速度
+        // 获取当前行的指针
         const float* row_ptr = depth_map.ptr<float>(r);
-        
+
         for (int c = 0; c < cols; ++c) {
-            float val = row_ptr[c]; // 获取像素深度值
-            
+            float val = row_ptr[c]; // 获取真实的深度值
+            if(val>0.0001f)
             file << val;
-            
-            // 如果不是该行最后一个元素，添加逗号
+            else file<<INFINITY;
+
             if (c < cols - 1) {
                 file << ",";
             }
         }
-        // 每行结束换行
         file << "\n";
     }
 
     file.close();
-    std::cout << "✅ 成功保存 CSV 文件: " << save_path << std::endl;
+    std::cout << "成功保存 CSV 文件: " << save_path << std::endl;
 }
 
 int main()
@@ -154,8 +150,12 @@ int main()
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>());
     Cloud_Build(cloud, depth);
 
-    int h = 640, w = 800;
+    int h = 480, w = 750;
     cv::Mat Depth_Map = Depth_Map_Build(h, w, fx, fy, cx, cy, cloud);
+
+    std::string img_path = "build/depth_map.png";
+    std::string save_path = "dep_rot.csv";
+    Savecsv_From_DepthMap(Depth_Map, save_path);
 
     cv::Mat img;
     cv::normalize(Depth_Map, img, 0, 255, cv::NORM_MINMAX, CV_8UC1);
