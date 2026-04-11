@@ -2,3 +2,5 @@ set(__QT_DEPLOY_TARGET_class3-24_FILE /Users/cuckoo/myclass/mac-object/build/cla
 set(__QT_DEPLOY_TARGET_class3-24_TYPE EXECUTABLE)
 set(__QT_DEPLOY_TARGET_class3-31_FILE /Users/cuckoo/myclass/mac-object/build/class3-31)
 set(__QT_DEPLOY_TARGET_class3-31_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_class4-7_FILE /Users/cuckoo/myclass/mac-object/build/class4-7)
+set(__QT_DEPLOY_TARGET_class4-7_TYPE EXECUTABLE)

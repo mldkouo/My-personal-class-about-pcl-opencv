@@ -82,7 +82,8 @@ cv::Mat search(cv::Mat& imgL, cv::Mat& imgR,
                     best_x = d;
                 }
             }
-            float disparity = x - best_x; // 计算视差，注：正视差表示右图像中的匹配点在左图象点点左侧
+            float disparity = x - best_x; // 计算视差
+            //注：正视差表示右图像中的匹配点在左图象点点左侧
             // 将视差值存储到视差图中
             match.at<float>(y, x) = disparity;
         }

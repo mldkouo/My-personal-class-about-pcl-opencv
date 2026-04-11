@@ -142,6 +142,19 @@ class3-31/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/class3-31.dir/build.make CMakeFiles/class3-31.dir/build
 .PHONY : class3-31/fast
 
+#=============================================================================
+# Target rules for targets named class4-7
+
+# Build rule for target.
+class4-7: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 class4-7
+.PHONY : class4-7
+
+# fast build rule for target.
+class4-7/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/class4-7.dir/build.make CMakeFiles/class4-7.dir/build
+.PHONY : class4-7/fast
+
 pj/pj3-24.o: pj/pj3-24.cpp.o
 .PHONY : pj/pj3-24.o
 
@@ -190,6 +203,30 @@ pj/pj3-31.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/class3-31.dir/build.make CMakeFiles/class3-31.dir/pj/pj3-31.cpp.s
 .PHONY : pj/pj3-31.cpp.s
 
+pj/pj4-7.o: pj/pj4-7.cpp.o
+.PHONY : pj/pj4-7.o
+
+# target to build an object file
+pj/pj4-7.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/class4-7.dir/build.make CMakeFiles/class4-7.dir/pj/pj4-7.cpp.o
+.PHONY : pj/pj4-7.cpp.o
+
+pj/pj4-7.i: pj/pj4-7.cpp.i
+.PHONY : pj/pj4-7.i
+
+# target to preprocess a source file
+pj/pj4-7.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/class4-7.dir/build.make CMakeFiles/class4-7.dir/pj/pj4-7.cpp.i
+.PHONY : pj/pj4-7.cpp.i
+
+pj/pj4-7.s: pj/pj4-7.cpp.s
+.PHONY : pj/pj4-7.s
+
+# target to generate assembly for a file
+pj/pj4-7.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/class4-7.dir/build.make CMakeFiles/class4-7.dir/pj/pj4-7.cpp.s
+.PHONY : pj/pj4-7.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -200,12 +237,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... class3-24"
 	@echo "... class3-31"
+	@echo "... class4-7"
 	@echo "... pj/pj3-24.o"
 	@echo "... pj/pj3-24.i"
 	@echo "... pj/pj3-24.s"
 	@echo "... pj/pj3-31.o"
 	@echo "... pj/pj3-31.i"
 	@echo "... pj/pj3-31.s"
+	@echo "... pj/pj4-7.o"
+	@echo "... pj/pj4-7.i"
+	@echo "... pj/pj4-7.s"
 .PHONY : help
 
 
